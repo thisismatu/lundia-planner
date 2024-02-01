@@ -61,7 +61,7 @@
 
 .bookcase-delete {
   cursor: pointer;
-  color: var(--gray-8);
+  color: var(--gray-7);
   padding: 2px;
   transition: all 0.15s ease;
 }
