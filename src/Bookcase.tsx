@@ -22,7 +22,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
       <div className="bookcase">
         {Array.from({ length: shelfCount }, (_, i) => {
           if (i === shelfCount - 1) {
-            return <div key={`shelf-${i}`} className="bookcase-shelf" style={{ height: 15 }}></div>;
+            return <div key={`shelf-${i}`} className="bookcase-shelf" style={{ height: 16 }}></div>;
           }
           const holeCount = Math.floor(holes / gaps) + (i === shelfCount - 2 ? remainder : 0);
           return (
@@ -30,7 +30,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
               key={i}
               className="bookcase-shelf"
               style={{
-                height: `${(holeCount + 1) * 15}px`,
+                height: `${(holeCount + 1) * 12}px`,
               }}
             >
               <p className="bookcase-holes">{holeCount} holes</p>
@@ -50,7 +50,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           />
         </label>
         <label>
-          Ladder height
+          Ladder
           <select
             value={ladderHeight}
             onChange={(e) => {

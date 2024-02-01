@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-end;
   margin: auto;
-  padding: 2rem 1.5rem 1rem;
+  padding: 4rem 1.5rem 1rem;
 }
 
 .button {
@@ -15,7 +15,7 @@
   border-radius: 48px;
   background-color: var(--gray-3);
   transition: all 0.15s ease;
-  margin: 2rem;
+  margin: 0 2rem 9rem;
 }
 
 .button:hover {
