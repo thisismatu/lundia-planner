@@ -18,8 +18,8 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
   const remainder = holes % gaps;
 
   return (
-    <div className="bookcase-container">
-      <div className="bookcase">
+    <div className="bookcase">
+      <div className="bookcase-ladder">
         {Array.from({ length: shelfCount }, (_, i) => {
           if (i === shelfCount - 1) {
             return <div key={`shelf-${i}`} className="bookcase-shelf" style={{ height: 16 }}></div>;
