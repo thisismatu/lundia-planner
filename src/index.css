@@ -11,10 +11,7 @@
   --gray-10: #4d4d4d;
   --gray-11: #333333;
   --gray-12: #1a1a1a;
-  --wood: hsl(30, 30%, 70%);
-  --accent: #4d5c4e;
-  --accent-light: #596a5a;
-  --accent-dark: #657866;
+  --wood: hsl(30, 40%, 70%);
 
   font-family: Inter, system-ui, sans-serif;
   font-weight: 400;
@@ -43,10 +40,7 @@
     --gray-10: #bdbdbd;
     --gray-11: #d6d6d6;
     --gray-12: #f0f0f0;
-    --accent: #4d5c4e;
-    --accent-light: #657866;
-    --accent-dark: #596a5a;
-    --wood: hsl(30, 30%, 60%);
+    --wood: hsl(30, 40%, 60%);
   }
 }
 
