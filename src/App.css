@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin: auto;
+  padding: 2rem 1.5rem 1rem;
+}
+
+.button {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  background-color: var(--gray-3);
+  transition: all 0.15s ease;
+  margin: 2rem;
+}
+
+.button:hover {
+  background-color: var(--gray-4);
+}
+
+.button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
