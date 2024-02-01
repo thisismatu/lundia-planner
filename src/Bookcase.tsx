@@ -66,7 +66,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           </select>
         </label>
       </div>
-      {/* <TrashIcon className="bookcase-delete" onClick={onDelete} /> */}
+      <TrashIcon className="bookcase-delete" onClick={onDelete} />
     </div>
   );
 };
