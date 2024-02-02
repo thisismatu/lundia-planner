@@ -18,7 +18,7 @@
 
 .bookcase-shelf {
   border-top: 0.25rem solid var(--wood);
-  height: 1.25vh;
+  height: 1.375vh;
 }
 
 .bookcase-shelf--hidden {
