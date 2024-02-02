@@ -19,6 +19,18 @@
 
 .bookcase-shelf {
   border-top: 4px solid var(--wood);
+  height: 12px;
+}
+
+.bookcase-shelf--hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.bookcase-shelf--last {
+  height: 4px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .bookcase-holes {
@@ -38,6 +50,11 @@
   width: 20px;
   height: 20px;
   transition: all 0.15s ease;
+}
+
+.bookcase-holes button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .bookcase-holes button:hover {

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import TrashIcon from './assets/trash-2.svg?react';
 import './Bookcase.css';
+import clsx from 'clsx';
 
 interface Props {
   onDelete?: () => void;
@@ -54,6 +55,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
     <div className="bookcase">
       <div className="bookcase-ladder">
         {distribution.map((v, idx, arr) => {
+          const shelfClasses = clsx('bookcase-shelf', v < 1 && 'bookcase-shelf--hidden');
           const nextIdx = (start: number) => arr.slice(start + 1).findIndex((v) => v === 1);
           const prevIdx = (start: number) =>
             arr
@@ -61,20 +63,10 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
               .reverse()
               .findIndex((v) => v === 1);
           if (idx === arr.length - 1)
-            return (
-              <div
-                key={`shelf-${idx}`}
-                className="bookcase-shelf"
-                style={{ height: `4px`, opacity: v }}
-              />
-            );
+            return <div key={`shelf-${idx}`} className="bookcase-shelf bookcase-shelf--last" />;
           return (
-            <div
-              key={`shelf-${idx}`}
-              className="bookcase-shelf"
-              style={{ height: `12px`, opacity: v }}
-            >
-              {idx !== arr.length - 2 && (
+            <div key={`shelf-${idx}`} className={shelfClasses}>
+              {idx !== arr.length - 2 && v > 0 && (
                 <div className="bookcase-holes">
                   {idx !== 0 && (
                     <button
