@@ -19,12 +19,12 @@ function distributeItems(shelfCount: number, ladderHeight: number): number[] {
   result[holeCount - 1] = 1;
   shelfCount--;
 
-  const emptySlotsBetweenItems = Math.floor((holeCount - 2) / shelfCount);
+  const emptySlotsBetweenItems = Math.round((holeCount - 2) / shelfCount);
   for (let i = 1, j = emptySlotsBetweenItems; i < shelfCount; i++, j += emptySlotsBetweenItems) {
     result[j] = 1;
   }
-  result.push(0);
 
+  result.push(0);
   return result;
 }
 
