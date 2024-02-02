@@ -101,7 +101,13 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
         <label>
           Shelves
           <div className="stepper">
-            <MinusIcon onClick={() => shelfCount > 2 && setShelfCount(shelfCount - 1)} />
+            <button
+              disabled={shelfCount < 2}
+              onClick={() => setShelfCount(shelfCount - 1)}
+              tabIndex={-1}
+            >
+              <MinusIcon />
+            </button>
             <input
               type="number"
               value={shelfCount || ''}
@@ -109,7 +115,13 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
               max={maxShelves}
               onChange={(e) => setShelfCount(Number(e.target.value))}
             />
-            <PlusIcon onClick={() => shelfCount < maxShelves && setShelfCount(shelfCount + 1)} />
+            <button
+              disabled={shelfCount > maxShelves}
+              onClick={() => setShelfCount(shelfCount + 1)}
+              tabIndex={-1}
+            >
+              <PlusIcon />
+            </button>
           </div>
         </label>
         <label>
