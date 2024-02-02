@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-end;
   margin: auto;
-  padding: 4rem 1.5rem 1rem;
+  padding: 4rem 1rem 1rem;
 }
 
 .button {
@@ -10,12 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
   background-color: var(--gray-3);
   transition: all 0.15s ease;
-  margin: 0 2rem 9rem;
+  margin-bottom: 9rem;
 }
 
 .button:hover {
@@ -24,6 +24,14 @@
 
 .button:disabled {
   pointer-events: none;
+}
+
+.button:first-child {
+  margin-right: 1.25rem;
+}
+
+.button:last-child {
+  margin-left: 1.25rem;
 }
 
 .button svg {
