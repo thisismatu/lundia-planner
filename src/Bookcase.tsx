@@ -97,6 +97,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           );
         })}
       </div>
+      <TrashIcon className="bookcase-delete" onClick={onDelete} />
       <div className="bookcase-footer">
         <label>
           Shelves
@@ -139,7 +140,6 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           </select>
         </label>
       </div>
-      <TrashIcon className="bookcase-delete" onClick={onDelete} />
     </div>
   );
 };
