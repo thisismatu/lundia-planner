@@ -7,11 +7,12 @@ interface Props {
   onDelete?: () => void;
 }
 
-const ratio = 4.85714;
+const edgeOffset = 3;
+const ratio = 5;
 const ladders = [48, 68, 78, 108, 148, 188, 208, 218, 228, 248];
 
 function distributeItems(shelfCount: number, ladderHeight: number): number[] {
-  const holeCount = Math.round(ladderHeight / ratio) - 1;
+  const holeCount = Math.round((ladderHeight - edgeOffset) / ratio);
   const result: number[] = Array(holeCount).fill(0);
 
   result[0] = 1;
