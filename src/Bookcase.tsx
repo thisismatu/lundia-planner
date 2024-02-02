@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import TrashIcon from './assets/trash-2.svg?react';
-import './Bookcase.css';
 import clsx from 'clsx';
+import TrashIcon from './assets/trash-2.svg?react';
+import MinusIcon from './assets/minus.svg?react';
+import PlusIcon from './assets/plus.svg?react';
+import './Bookcase.css';
 
 interface Props {
   onDelete?: () => void;
@@ -33,6 +35,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
   const [ladderHeight, setLadderHeight] = useState(208);
   const [distribution, setDistribution] = useState(distributeItems(shelfCount, ladderHeight));
   const availableHoles = distribution.filter((v) => v === 0).length;
+  const maxShelves = Math.round(availableHoles / 3);
 
   useEffect(() => {
     if (!ladderHeight || !shelfCount) return;
@@ -97,17 +100,25 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
       <div className="bookcase-footer">
         <label>
           Shelves
-          <input
-            type="number"
-            value={shelfCount || ''}
-            min={2}
-            max={Math.round(availableHoles / 3)}
-            onChange={(e) => setShelfCount(Number(e.target.value))}
-          />
+          <div className="stepper">
+            <MinusIcon onClick={() => shelfCount > 2 && setShelfCount(shelfCount - 1)} />
+            <input
+              type="number"
+              value={shelfCount || ''}
+              min={2}
+              max={maxShelves}
+              onChange={(e) => setShelfCount(Number(e.target.value))}
+            />
+            <PlusIcon onClick={() => shelfCount < maxShelves && setShelfCount(shelfCount + 1)} />
+          </div>
         </label>
         <label>
           Ladder
-          <select value={ladderHeight} onChange={(e) => setLadderHeight(Number(e.target.value))}>
+          <select
+            className="select"
+            value={ladderHeight}
+            onChange={(e) => setLadderHeight(Number(e.target.value))}
+          >
             {ladders.map((h) => (
               <option key={`ladder-${h}`} value={h}>
                 {h} cm
