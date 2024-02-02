@@ -113,19 +113,17 @@
 }
 
 .stepper {
-  position: relative;
+  display: flex;
   padding: 0;
 }
 
 .stepper input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
   appearance: none;
   background: transparent;
   font: inherit;
   text-align: center;
   border-radius: 0.25rem;
+  width: 100%;
 }
 
 .stepper input::-webkit-outer-spin-button,
@@ -134,14 +132,8 @@
 }
 
 .stepper svg {
-  position: absolute;
-  top: 0;
+  flex-shrink: 0;
   width: 2rem;
   height: 2rem;
   padding: 0.625rem;
-  z-index: 1;
-}
-
-.stepper svg:last-child {
-  right: 0;
 }
