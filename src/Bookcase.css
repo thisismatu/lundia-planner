@@ -164,6 +164,11 @@
   right: 0;
 }
 
+.stepper button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .stepper svg {
   width: 2rem;
   height: 2rem;

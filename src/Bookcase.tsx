@@ -103,7 +103,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           Shelves
           <div className="stepper">
             <button
-              disabled={shelfCount < 2}
+              disabled={shelfCount <= 2}
               onClick={() => setShelfCount(shelfCount - 1)}
               tabIndex={-1}
             >
@@ -117,7 +117,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
               onChange={(e) => setShelfCount(Number(e.target.value))}
             />
             <button
-              disabled={shelfCount > maxShelves}
+              disabled={shelfCount >= maxShelves}
               onClick={() => setShelfCount(shelfCount + 1)}
               tabIndex={-1}
             >
