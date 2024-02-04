@@ -35,7 +35,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
   const [ladderHeight, setLadderHeight] = useState(208);
   const [distribution, setDistribution] = useState(distributeItems(shelfCount, ladderHeight));
   const availableHoles = distribution.filter((v) => v === 0).length;
-  const maxShelves = Math.round(availableHoles / 3);
+  const maxShelves = Math.floor(availableHoles / 2);
 
   useEffect(() => {
     if (!ladderHeight || !shelfCount) return;
@@ -66,6 +66,7 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
               .slice(0, start)
               .reverse()
               .findIndex((v) => v === 1);
+          const distance = (start: number) => nextIdx(start) * 5 + 3;
           if (idx === arr.length - 1)
             return <div key={`shelf-${idx}`} className="bookcase-shelf bookcase-shelf--last" />;
           return (
@@ -81,7 +82,9 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
                       &uarr;
                     </button>
                   )}
-                  <span>{nextIdx(idx)} holes</span>
+                  <span>
+                    {nextIdx(idx)} holes ({distance(idx)} cm)
+                  </span>
                   {idx !== 0 && (
                     <button
                       onClick={() => handleShelfMove(idx, +1)}
