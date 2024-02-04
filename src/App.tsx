@@ -18,19 +18,21 @@ function App() {
         <button
           className="header-button"
           onClick={() => setBookcases((curr) => [...curr, crypto.randomUUID()])}
-          disabled={bookcases.length > 6}
+          disabled={bookcases.length > 7}
         >
           <PlusIcon />
           <span>Add bookcase</span>
         </button>
       </header>
-      <div className="wrapper">
-        {bookcases.map((uuid, i) => (
-          <Bookcase
-            key={`case-${uuid}`}
-            onDelete={() => setBookcases(bookcases.filter((_, idx) => idx !== i))}
-          />
-        ))}
+      <div className="scroll-container" dir="ltr">
+        <div className="container">
+          {bookcases.map((uuid, i) => (
+            <Bookcase
+              key={`case-${uuid}`}
+              onDelete={() => setBookcases(bookcases.filter((_, idx) => idx !== i))}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

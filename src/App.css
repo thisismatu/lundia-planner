@@ -68,15 +68,24 @@
   height: 1rem;
 }
 
-.wrapper {
+.scroll-container {
   display: flex;
-  align-items: flex-end;
-  margin: auto;
-  padding: 1rem 1.75rem;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 @media screen and (min-width: 768px) {
-  .header {
-    padding-inline: 1.25rem;
+  .scroll-container {
+    padding: 1.5rem;
   }
+}
+.container {
+  display: flex;
+  align-items: flex-end;
+  margin: auto;
+  padding-inline: 0.25rem;
 }
