@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Bookcase } from './Bookcase';
-import MinusIcon from './assets/minus.svg?react';
 import PlusIcon from './assets/plus.svg?react';
+import Logo from './assets/logo.svg?react';
 import './App.css';
 
 function App() {
@@ -9,27 +9,28 @@ function App() {
 
   return (
     <>
-      <div className="wrapper">
+      <header className="header">
+        <div className="header-logo">
+          <Logo />
+          <h1 className="desktop">Lundia Shelf Planner</h1>
+          <h1 className="mobile">Planner</h1>
+        </div>
         <button
-          className="button"
-          onClick={() => setBookcases((curr) => curr.slice(0, -1))}
-          disabled={bookcases.length < 2}
+          className="header-button"
+          onClick={() => setBookcases((curr) => [...curr, crypto.randomUUID()])}
+          disabled={bookcases.length > 6}
         >
-          <MinusIcon />
+          <PlusIcon />
+          <span>Add bookcase</span>
         </button>
+      </header>
+      <div className="wrapper">
         {bookcases.map((uuid, i) => (
           <Bookcase
             key={`case-${uuid}`}
             onDelete={() => setBookcases(bookcases.filter((_, idx) => idx !== i))}
           />
         ))}
-        <button
-          className="button"
-          onClick={() => setBookcases((curr) => [...curr, crypto.randomUUID()])}
-          disabled={bookcases.length > 6}
-        >
-          <PlusIcon />
-        </button>
       </div>
     </>
   );
