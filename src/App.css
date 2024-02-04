@@ -2,9 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
-  height: 3.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--gray-3);
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding-inline: 1.5rem;
+  }
 }
 
 .header-logo {
@@ -23,20 +28,20 @@
 }
 
 .header-logo h1.desktop {
-  display: block;
-}
-
-.header-logo h1.mobile {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+.header-logo h1.mobile {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
   .header-logo h1.desktop {
-    display: none;
+    display: block;
   }
 
   .header-logo h1.mobile {
-    display: block;
+    display: none;
   }
 }
 
@@ -47,7 +52,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0 0.75rem;
-  height: 2rem;
+  height: 2.25rem;
   border-radius: 0.25rem;
   background-color: var(--wood);
   color: #1a1a1a;
@@ -67,5 +72,11 @@
   display: flex;
   align-items: flex-end;
   margin: auto;
-  padding: 1.5rem 1.75rem;
+  padding: 1rem 1.75rem;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding-inline: 1.25rem;
+  }
 }
