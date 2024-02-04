@@ -60,13 +60,12 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
       <div className="bookcase-ladder">
         {distribution.map((v, idx, arr) => {
           const shelfClasses = clsx('bookcase-shelf', v < 1 && 'bookcase-shelf--hidden');
-          const nextIdx = (start: number) => arr.slice(start + 1).findIndex((v) => v === 1);
-          const prevIdx = (start: number) =>
-            arr
-              .slice(0, start)
-              .reverse()
-              .findIndex((v) => v === 1);
-          const distance = (start: number) => nextIdx(start) * 5 + 3;
+          const nextIdx = arr.slice(idx + 1).findIndex((v) => v === 1);
+          const prevIdx = arr
+            .slice(0, idx)
+            .reverse()
+            .findIndex((v) => v === 1);
+          const distance = nextIdx * 5 + 3;
           if (idx === arr.length - 1)
             return <div key={`shelf-${idx}`} className="bookcase-shelf bookcase-shelf--last" />;
           return (
@@ -77,19 +76,19 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
                     <button
                       onClick={() => handleShelfMove(idx, -1)}
                       tabIndex={-1}
-                      disabled={prevIdx(idx) < 3}
+                      disabled={prevIdx < 3}
                     >
                       &uarr;
                     </button>
                   )}
                   <span>
-                    {nextIdx(idx)} holes ({distance(idx)} cm)
+                    {nextIdx} holes ({distance} cm)
                   </span>
                   {idx !== 0 && (
                     <button
                       onClick={() => handleShelfMove(idx, +1)}
                       tabIndex={-1}
-                      disabled={nextIdx(idx) < 3}
+                      disabled={nextIdx < 3}
                     >
                       &darr;
                     </button>
