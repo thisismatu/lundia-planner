@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Bookcase } from './Bookcase';
 import PlusIcon from './assets/plus.svg?react';
 import Logo from './assets/logo.svg?react';
@@ -6,6 +6,15 @@ import './App.css';
 
 function App() {
   const [bookcases, setBookcases] = useState([crypto.randomUUID()]);
+  const bookcaseRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bookcaseRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }, [bookcases]);
 
   return (
     <>
@@ -28,6 +37,7 @@ function App() {
         <div className="container">
           {bookcases.map((uuid, i) => (
             <Bookcase
+              ref={bookcaseRef}
               key={`case-${uuid}`}
               onDelete={() => setBookcases(bookcases.filter((_, idx) => idx !== i))}
             />
