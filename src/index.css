@@ -17,6 +17,7 @@
   font-weight: 400;
   font-synthesis: none;
   font-size: 16px;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

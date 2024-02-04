@@ -71,7 +71,10 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           return (
             <div key={`shelf-${idx}`} className={shelfClasses}>
               {idx !== arr.length - 2 && v > 0 && (
-                <div className="bookcase-holes">
+                <div
+                  className="bookcase-holes"
+                  style={{ marginTop: `${((nextIdx - 1) * 1.375) / 2}vh` }}
+                >
                   {idx !== 0 && (
                     <button
                       onClick={() => handleShelfMove(idx, -1)}
@@ -99,7 +102,9 @@ export const Bookcase: FC<Props> = ({ onDelete }) => {
           );
         })}
       </div>
-      <TrashIcon className="bookcase-delete" onClick={onDelete} />
+      <button className="bookcase-delete" onClick={onDelete} tabIndex={-1}>
+        <TrashIcon />
+      </button>
       <div className="bookcase-footer">
         <label>
           Shelves
