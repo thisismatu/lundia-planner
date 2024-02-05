@@ -21,8 +21,7 @@ function App() {
       <header className="header">
         <div className="header-logo">
           <Logo />
-          <h1 className="desktop">Lundia Shelf Planner</h1>
-          <h1 className="mobile">Planner</h1>
+          <h1>Lundia Planner</h1>
         </div>
         <button
           className="header-button"

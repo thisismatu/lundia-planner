@@ -27,28 +27,11 @@
   font-size: 1rem;
 }
 
-.header-logo h1.desktop {
-  display: none;
-}
-
-.header-logo h1.mobile {
-  display: block;
-}
-
-@media screen and (min-width: 768px) {
-  .header-logo h1.desktop {
-    display: block;
-  }
-
-  .header-logo h1.mobile {
-    display: none;
-  }
-}
-
 .header-button {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-shrink: 0;
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0 0.75rem;
