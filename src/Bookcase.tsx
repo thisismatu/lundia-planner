@@ -1,8 +1,7 @@
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { Stepper } from './Stepper';
 import TrashIcon from './assets/trash-2.svg?react';
-import MinusIcon from './assets/minus.svg?react';
-import PlusIcon from './assets/plus.svg?react';
 import './Bookcase.css';
 
 interface Props {
@@ -36,13 +35,16 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
     const [ladderHeight, setLadderHeight] = useState(208);
     const [distribution, setDistribution] = useState(distributeItems(shelfCount, ladderHeight));
     const availableHoles = distribution.filter((v) => v === 0).length;
+    const minShelves = 2;
     const maxShelves = Math.floor(availableHoles / 2);
 
     useEffect(() => {
       if (!ladderHeight || !shelfCount) return;
-      const dist = distributeItems(shelfCount, ladderHeight);
+      const asd =
+        shelfCount < minShelves ? minShelves : shelfCount > maxShelves ? maxShelves : shelfCount;
+      const dist = distributeItems(asd, ladderHeight);
       setDistribution(dist);
-    }, [ladderHeight, shelfCount]);
+    }, [ladderHeight, maxShelves, shelfCount]);
 
     useEffect(() => {
       if (!ladderHeight) return;
@@ -109,29 +111,12 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
         <div className="bookcase-footer">
           <label>
             Shelves
-            <div className="stepper">
-              <button
-                disabled={shelfCount <= 2}
-                onClick={() => setShelfCount(shelfCount - 1)}
-                tabIndex={-1}
-              >
-                <MinusIcon />
-              </button>
-              <input
-                type="number"
-                value={shelfCount || ''}
-                min={2}
-                max={maxShelves}
-                onChange={(e) => setShelfCount(Number(e.target.value))}
-              />
-              <button
-                disabled={shelfCount >= maxShelves}
-                onClick={() => setShelfCount(shelfCount + 1)}
-                tabIndex={-1}
-              >
-                <PlusIcon />
-              </button>
-            </div>
+            <Stepper
+              value={shelfCount}
+              onChange={setShelfCount}
+              minValue={minShelves}
+              maxValue={maxShelves}
+            />
           </label>
           <label>
             Ladder
