@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { Trash2Icon } from 'lucide-react';
 import { Stepper } from './Stepper';
-import TrashIcon from './assets/trash-2.svg?react';
 import './Bookcase.css';
 
 interface Props {
@@ -106,7 +106,7 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
           })}
         </div>
         <button className="bookcase-delete" onClick={onDelete} tabIndex={-1}>
-          <TrashIcon />
+          <Trash2Icon />
         </button>
         <div className="bookcase-footer">
           <label>

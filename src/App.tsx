@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { Plus as PlusIcon } from 'lucide-react';
 import { Bookcase } from './Bookcase';
-import PlusIcon from './assets/plus.svg?react';
 import Logo from './assets/logo.svg?react';
 import './App.css';
 

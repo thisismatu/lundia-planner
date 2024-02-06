@@ -1,6 +1,5 @@
 import { FC, KeyboardEvent } from 'react';
-import MinusIcon from './assets/minus.svg?react';
-import PlusIcon from './assets/plus.svg?react';
+import { MinusIcon, PlusIcon } from 'lucide-react';
 import './Stepper.css';
 
 interface Props {
