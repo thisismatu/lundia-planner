@@ -17,7 +17,7 @@
   font-weight: 400;
   font-synthesis: none;
   font-size: 16px;
-  font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum', 'liga' 1, 'calt' 1; /* fix for Chrome */
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,6 +42,12 @@
     --gray-11: #d6d6d6;
     --gray-12: #f0f0f0;
     --wood: hsl(30, 40%, 60%);
+  }
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
   }
 }
 
