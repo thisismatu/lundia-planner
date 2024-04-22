@@ -23,6 +23,9 @@ function App() {
           <Logo />
           <h1>Lundia Planner</h1>
         </div>
+        {bookcases.length > 0 && (
+          <div className="totalWidth">Width: {bookcases.length * 80 + 4} cm</div>
+        )}
         <button
           className="header-button"
           onClick={() =>
