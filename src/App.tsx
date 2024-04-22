@@ -5,7 +5,7 @@ import Logo from './assets/logo.svg?react';
 import './App.css';
 
 function App() {
-  const [bookcases, setBookcases] = useState([crypto.randomUUID()]);
+  const [bookcases, setBookcases] = useState([{ id: crypto.randomUUID(), height: 208 }]);
   const bookcaseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +25,12 @@ function App() {
         </div>
         <button
           className="header-button"
-          onClick={() => setBookcases((curr) => [...curr, crypto.randomUUID()])}
+          onClick={() =>
+            setBookcases((curr) => [
+              ...curr,
+              { id: crypto.randomUUID(), height: curr[curr.length - 1]?.height || 208 },
+            ])
+          }
           disabled={bookcases.length > 7}
         >
           <PlusIcon />
@@ -34,11 +39,15 @@ function App() {
       </header>
       <div className="scroll-container" dir="ltr">
         <div className="container">
-          {bookcases.map((uuid, i) => (
+          {bookcases.map(({ id, height }) => (
             <Bookcase
               ref={bookcaseRef}
-              key={`case-${uuid}`}
-              onDelete={() => setBookcases(bookcases.filter((_, idx) => idx !== i))}
+              key={`case-${id}`}
+              initialHeight={height}
+              onDelete={() => setBookcases(bookcases.filter((b) => b.id !== id))}
+              onUpdate={(height) =>
+                setBookcases(bookcases.map((b) => (b.id === id ? { ...b, height } : b)))
+              }
             />
           ))}
         </div>

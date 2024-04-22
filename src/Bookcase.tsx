@@ -1,11 +1,13 @@
-import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
+import { ChangeEvent, ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
 import { Stepper } from './Stepper';
 import './Bookcase.css';
 
 interface Props {
-  onDelete?: () => void;
+  onDelete: () => void;
+  onUpdate: (height: number) => void;
+  initialHeight: number;
 }
 
 const edgeOffset = 3;
@@ -30,9 +32,9 @@ function distributeItems(shelfCount: number, ladderHeight: number): number[] {
 }
 
 export const Bookcase = forwardRef<HTMLDivElement, Props>(
-  ({ onDelete }: Props, ref: ForwardedRef<HTMLDivElement>) => {
+  ({ onDelete, onUpdate, initialHeight }: Props, ref: ForwardedRef<HTMLDivElement>) => {
     const [shelfCount, setShelfCount] = useState(2);
-    const [ladderHeight, setLadderHeight] = useState(208);
+    const [ladderHeight, setLadderHeight] = useState(initialHeight);
     const [distribution, setDistribution] = useState(distributeItems(shelfCount, ladderHeight));
     const availableHoles = distribution.filter((v) => v === 0).length;
     const minShelves = 2;
@@ -50,6 +52,12 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
       if (!ladderHeight) return;
       setShelfCount(2);
     }, [ladderHeight]);
+
+    const handleLadderChange = (e: ChangeEvent<HTMLSelectElement>) => {
+      const height = Number(e.target.value);
+      setLadderHeight(height);
+      onUpdate(height);
+    };
 
     const handleShelfMove = (currIdx: number, change: number) => {
       const newDist = [...distribution];
@@ -120,11 +128,7 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
           </label>
           <label>
             Ladder
-            <select
-              className="select"
-              value={ladderHeight}
-              onChange={(e) => setLadderHeight(Number(e.target.value))}
-            >
+            <select className="select" value={ladderHeight} onChange={handleLadderChange}>
               {ladders.map((h) => (
                 <option key={`ladder-${h}`} value={h}>
                   {h} cm
