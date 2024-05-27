@@ -30,7 +30,7 @@ export const Stepper: FC<Props> = ({ onChange, value, minValue, maxValue }) => {
     <div className="stepper">
       <button
         disabled={minValue ? value <= minValue : false}
-        onClick={() => onChange(value - 1)}
+        onMouseDown={() => onChange(value - 1)}
         tabIndex={-1}
       >
         <MinusIcon />
@@ -47,7 +47,7 @@ export const Stepper: FC<Props> = ({ onChange, value, minValue, maxValue }) => {
       />
       <button
         disabled={maxValue ? value >= maxValue : false}
-        onClick={() => onChange(value + 1)}
+        onMouseDown={() => onChange(value + 1)}
         tabIndex={-1}
       >
         <PlusIcon />

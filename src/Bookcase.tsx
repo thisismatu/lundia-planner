@@ -88,7 +88,7 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
                   >
                     {idx !== 0 && (
                       <button
-                        onClick={() => handleShelfMove(idx, -1)}
+                        onMouseDown={() => handleShelfMove(idx, -1)}
                         tabIndex={-1}
                         disabled={prevIdx < 3}
                       >
@@ -100,7 +100,7 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
                     </span>
                     {idx !== 0 && (
                       <button
-                        onClick={() => handleShelfMove(idx, +1)}
+                        onMouseDown={() => handleShelfMove(idx, +1)}
                         tabIndex={-1}
                         disabled={nextIdx < 3}
                       >
