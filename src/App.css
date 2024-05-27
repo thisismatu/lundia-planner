@@ -23,39 +23,9 @@
 }
 
 .header-logo h1 {
-  display: none;
-}
-
-@media screen and (min-width: 768px) {
-  .header-logo h1 {
-    font-weight: 600;
-    font-size: 1rem;
-    display: block;
-  }
-}
-
-.header-button {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  flex-shrink: 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0 0.75rem;
-  height: 2.25rem;
-  border-radius: 0.25rem;
-  background-color: var(--wood);
-  color: #1a1a1a;
-  transition: all 0.15s ease;
-}
-
-.header-button:hover {
-  box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.1);
-}
-
-.header-button svg {
-  width: 1rem;
-  height: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  display: block;
 }
 
 .totalWidth {
@@ -84,4 +54,37 @@
   align-items: flex-end;
   margin: auto;
   padding-inline: 0.25rem;
+}
+
+.add-bookcase {
+  align-self: center;
+  background-color: transparent;
+  color: var(--gray-7);
+  padding: 0.25rem;
+  margin: 0.5rem;
+  transition: all 0.15s ease;
+  border-radius: 100px;
+}
+
+.add-bookcase:first-of-type {
+  margin-right: 2rem;
+}
+
+.add-bookcase:last-of-type {
+  margin-left: 2rem;
+}
+
+.add-bookcase:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.add-bookcase:hover {
+  color: #fff;
+  background-color: var(--wood);
+  box-shadow: 0 0 0 0.25rem var(--wood);
+}
+
+.add-bookcase svg {
+  display: block;
 }

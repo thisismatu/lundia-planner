@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Plus as PlusIcon } from 'lucide-react';
+import { Plus, Plus as PlusIcon } from 'lucide-react';
 import { Bookcase } from './Bookcase';
 import Logo from './assets/logo.svg?react';
 import './App.css';
@@ -16,6 +16,13 @@ function App() {
     });
   }, [bookcases]);
 
+  const addBookcase = (first?: boolean) => {
+    setBookcases((curr) => {
+      if (first) return [{ id: crypto.randomUUID(), height: curr[0]?.height || 208 }, ...curr];
+      return [...curr, { id: crypto.randomUUID(), height: curr[curr.length - 1]?.height || 208 }];
+    });
+  };
+
   return (
     <>
       <header className="header">
@@ -26,22 +33,16 @@ function App() {
         {bookcases.length > 0 && (
           <div className="totalWidth">Width: {bookcases.length * 80 + 4} cm</div>
         )}
-        <button
-          className="header-button"
-          onClick={() =>
-            setBookcases((curr) => [
-              ...curr,
-              { id: crypto.randomUUID(), height: curr[curr.length - 1]?.height || 208 },
-            ])
-          }
-          disabled={bookcases.length > 7}
-        >
-          <PlusIcon />
-          <span>Add bookcase</span>
-        </button>
       </header>
       <div className="scroll-container" dir="ltr">
         <div className="container">
+          <button
+            className="add-bookcase"
+            onClick={() => addBookcase(true)}
+            disabled={bookcases.length > 7}
+          >
+            <PlusIcon />
+          </button>
           {bookcases.map(({ id, height }) => (
             <Bookcase
               ref={bookcaseRef}
@@ -53,6 +54,13 @@ function App() {
               }
             />
           ))}
+          <button
+            className="add-bookcase"
+            onClick={() => addBookcase(false)}
+            disabled={bookcases.length > 7}
+          >
+            <PlusIcon />
+          </button>
         </div>
       </div>
     </>
