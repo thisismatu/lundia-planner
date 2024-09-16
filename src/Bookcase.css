@@ -94,7 +94,7 @@
   color: var(--gray-7);
   padding: 0.25rem;
   transition: all 0.15s ease;
-  margin-block: 0.5rem;
+  margin-block: 0.5rem 0.75rem;
   border-radius: 100px;
 }
 
