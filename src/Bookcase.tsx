@@ -1,18 +1,26 @@
-import { ChangeEvent, ForwardedRef, forwardRef, useEffect, useState } from 'react';
-import clsx from 'clsx';
-import { Trash2Icon } from 'lucide-react';
-import { Stepper } from './Stepper';
-import './Bookcase.css';
+import {
+  ChangeEvent,
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useState,
+} from "react";
+import clsx from "clsx";
+import { Trash2Icon } from "lucide-react";
+import { Stepper } from "./Stepper";
+import "./Bookcase.css";
 
 interface Props {
   onDelete: () => void;
-  onUpdate: (height: number) => void;
+  onUpdate: (height: number, width: number) => void;
   initialHeight: number;
+  initialWidth: number;
 }
 
 const edgeOffset = 3;
 const ratio = 5;
 const ladders = [48, 68, 78, 108, 148, 188, 208, 218, 228, 248];
+const widths = [50, 80, 100];
 
 function distributeItems(shelfCount: number, ladderHeight: number): number[] {
   const holeCount = Math.round((ladderHeight - edgeOffset) / ratio);
@@ -23,7 +31,11 @@ function distributeItems(shelfCount: number, ladderHeight: number): number[] {
   shelfCount--;
 
   const emptySlotsBetweenItems = Math.round((holeCount - 2) / shelfCount);
-  for (let i = 1, j = emptySlotsBetweenItems; i < shelfCount; i++, j += emptySlotsBetweenItems) {
+  for (
+    let i = 1, j = emptySlotsBetweenItems;
+    i < shelfCount;
+    i++, j += emptySlotsBetweenItems
+  ) {
     result[j] = 1;
   }
 
@@ -32,10 +44,16 @@ function distributeItems(shelfCount: number, ladderHeight: number): number[] {
 }
 
 export const Bookcase = forwardRef<HTMLDivElement, Props>(
-  ({ onDelete, onUpdate, initialHeight }: Props, ref: ForwardedRef<HTMLDivElement>) => {
+  (
+    { onDelete, onUpdate, initialHeight, initialWidth }: Props,
+    ref: ForwardedRef<HTMLDivElement>,
+  ) => {
     const [shelfCount, setShelfCount] = useState(2);
     const [ladderHeight, setLadderHeight] = useState(initialHeight);
-    const [distribution, setDistribution] = useState(distributeItems(shelfCount, ladderHeight));
+    const [shelfWidth, setShelfWidth] = useState(initialWidth);
+    const [distribution, setDistribution] = useState(
+      distributeItems(shelfCount, ladderHeight),
+    );
     const availableHoles = distribution.filter((v) => v === 0).length;
     const minShelves = 2;
     const maxShelves = Math.floor(availableHoles / 2);
@@ -43,7 +61,11 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
     useEffect(() => {
       if (!ladderHeight || !shelfCount) return;
       const asd =
-        shelfCount < minShelves ? minShelves : shelfCount > maxShelves ? maxShelves : shelfCount;
+        shelfCount < minShelves
+          ? minShelves
+          : shelfCount > maxShelves
+            ? maxShelves
+            : shelfCount;
       const dist = distributeItems(asd, ladderHeight);
       setDistribution(dist);
     }, [ladderHeight, maxShelves, shelfCount]);
@@ -56,7 +78,13 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
     const handleLadderChange = (e: ChangeEvent<HTMLSelectElement>) => {
       const height = Number(e.target.value);
       setLadderHeight(height);
-      onUpdate(height);
+      onUpdate(height, shelfWidth);
+    };
+
+    const handleShelfChange = (e: ChangeEvent<HTMLSelectElement>) => {
+      const width = Number(e.target.value);
+      setShelfWidth(width);
+      onUpdate(ladderHeight, width);
     };
 
     const handleShelfMove = (currIdx: number, change: number) => {
@@ -68,9 +96,12 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
 
     return (
       <div className="bookcase" ref={ref}>
-        <div className="bookcase-ladder">
+        <div className={`bookcase-ladder bookcase-ladder--${shelfWidth}`}>
           {distribution.map((v, idx, arr) => {
-            const shelfClasses = clsx('bookcase-shelf', v < 1 && 'bookcase-shelf--hidden');
+            const shelfClasses = clsx(
+              "bookcase-shelf",
+              v < 1 && "bookcase-shelf--hidden",
+            );
             const nextIdx = arr.slice(idx + 1).findIndex((v) => v === 1);
             const prevIdx = arr
               .slice(0, idx)
@@ -78,7 +109,12 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
               .findIndex((v) => v === 1);
             const distance = nextIdx * 5 + 3;
             if (idx === arr.length - 1)
-              return <div key={`shelf-${idx}`} className="bookcase-shelf bookcase-shelf--last" />;
+              return (
+                <div
+                  key={`shelf-${idx}`}
+                  className="bookcase-shelf bookcase-shelf--last"
+                />
+              );
             return (
               <div key={`shelf-${idx}`} className={shelfClasses}>
                 {idx !== arr.length - 2 && v > 0 && (
@@ -117,27 +153,38 @@ export const Bookcase = forwardRef<HTMLDivElement, Props>(
           <Trash2Icon />
         </button>
         <div className="bookcase-footer">
-          <label>
-            Shelves
-            <Stepper
-              value={shelfCount}
-              onChange={setShelfCount}
-              minValue={minShelves}
-              maxValue={maxShelves}
-            />
-          </label>
-          <label>
-            Ladder
-            <select className="select" value={ladderHeight} onChange={handleLadderChange}>
-              {ladders.map((h) => (
-                <option key={`ladder-${h}`} value={h}>
-                  {h} cm
-                </option>
-              ))}
-            </select>
-          </label>
+          <Stepper
+            value={shelfCount}
+            onChange={setShelfCount}
+            minValue={minShelves}
+            maxValue={maxShelves}
+          />
+          <select
+            className="select"
+            value={shelfWidth}
+            onChange={handleShelfChange}
+          >
+            <option disabled>Width</option>
+            {widths.map((w) => (
+              <option key={`shelft-${w}`} value={w}>
+                {w} cm
+              </option>
+            ))}
+          </select>
+          <select
+            className="select"
+            value={ladderHeight}
+            onChange={handleLadderChange}
+          >
+            <option disabled>Height</option>
+            {ladders.map((h) => (
+              <option key={`ladder-${h}`} value={h}>
+                {h} cm
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     );
-  }
+  },
 );
